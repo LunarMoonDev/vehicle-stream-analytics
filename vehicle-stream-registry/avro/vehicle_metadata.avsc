@@ -1,0 +1,13 @@
+{
+    "name": "VehicleMetadata",
+    "namespace": "vehicle.stream.avro",
+    "type": "record",
+    "fields": [
+        { "name": "vehicle_id", "type": "string" },
+        { "name": "type", "type": "string" },
+        { "name": "model", "type": "string" },
+        { "name": "driver_id", "type": "string" },
+        { "name": "driver_name", "type": "string" },
+        { "name": "max_speed", "type": "int" }
+    ]
+}

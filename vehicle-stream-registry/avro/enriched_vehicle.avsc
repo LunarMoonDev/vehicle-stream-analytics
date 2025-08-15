@@ -1,0 +1,23 @@
+{
+  "name": "EnrichedEvent",
+  "namespace": "vehicle.stream.avro",
+  "type": "record",
+  "fields": [
+    { "name": "vehicle_id", "type": "string" },
+    { "name": "type", "type": "string" },
+    { "name": "model", "type": "string" },
+    { "name": "driver_id", "type": "string" },
+    { "name": "driver_name", "type": "string" },
+    { "name": "lat", "type": "double" },
+    { "name": "lon", "type": "double" },
+    { "name": "speed", "type": "int" },
+    { "name": "max_speed", "type": "int" },
+    {
+      "name": "event_time",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}
