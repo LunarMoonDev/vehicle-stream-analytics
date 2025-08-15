@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  json_to_avro:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: json_to_avro
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_APPLICATION_NAME=${SPRING_APPLICATION_NAME}
+      - SPRING_STREAM_APPLICATION=${SPRING_STREAM_APPLICATION}
+      - SPRING_KAFKA_SERVERS=${SPRING_KAFKA_SERVERS}
+      - SPRING_SCHEMA_REGISTRY_URL=${SPRING_SCHEMA_REGISTRY_URL}
+      - SPRING_SPECIFIC_AVRO_READER=${SPRING_SPECIFIC_AVRO_READER}
+      - STREAM_VEHICLE_EVENT_JSON_TOPIC=${STREAM_VEHICLE_EVENT_JSON_TOPIC}
+      - STREAM_VEHICLE_EVENT_AVRO_TOPIC=${STREAM_VEHICLE_EVENT_AVRO_TOPIC}
+      - STREAM_VEHICLE_METADATA_JSON_TOPIC=${STREAM_VEHICLE_METADATA_JSON_TOPIC}
+      - STREAM_VEHICLE_METADATA_AVRO_TOPIC=${STREAM_VEHICLE_METADATA_AVRO_TOPIC}
+    networks:
+      - kafka-net
+
+networks:
+  kafka-net:
+    name: kafka-net
+    external: true
