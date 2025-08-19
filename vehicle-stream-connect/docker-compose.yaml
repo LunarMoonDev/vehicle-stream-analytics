@@ -30,6 +30,7 @@ services:
     networks:
       - kafka-net
       - back-net
+      - db-net
   
   minio:
     container_name: bucket_storage
@@ -52,4 +53,7 @@ networks:
     external: true
   back-net:
     name: back-net
+    driver: bridge
+  db-net:
+    name: db-net
     driver: bridge
