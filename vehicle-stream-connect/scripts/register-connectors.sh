@@ -23,6 +23,12 @@ fi
 declare -A CONNECTORS=(
     ["vehicle-event-s3-source"]="s3-source-events.json"
     ["vehicle-metadata-s3-source"]="s3-source-metadatas.json"
+    ["db-sink-speeding-events"]="db-sink-speeding-events.json"
+    ["db-sink-braking-events"]="db-sink-braking-events.json"
+    ["db-sink-idle-events"]="db-sink-idle-events.json"
+    ["db-sink-enriched-events"]="db-sink-enriched-events.json"
+    ["db-sink-avro-events"]="db-sink-avro-events.json"
+    ["db-sink-avro-metadatas"]="db-sink-avro-metadatas.json"
 )
 
 for CONNECTOR in "${!CONNECTORS[@]}"; do

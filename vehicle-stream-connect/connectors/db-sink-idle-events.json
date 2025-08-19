@@ -1,0 +1,31 @@
+{
+    "name": "db-sink-idle-events",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "task.max": "1",
+
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter.schema.registry.url": "http://schema_registry:8081",
+        "value.converter.schemas.enable": "true",
+        
+        "errors.tolerance": "all",
+        "errors.log.enable": "true",
+        "errors.log.include.messages": "true",
+        
+        "topics": "vehicle-idle-topic",
+        "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+        "connection.user": "sample",
+        "connection.password": "pass",
+        
+        "table.name.format": "vehicle_idle_events",
+        "db.timezone": "UTC",
+        "dialect.name": "PostgreSqlDatabaseDialect",
+        
+        "auto.create": "true",
+        "insert.mode": "insert",
+        "auto.evolve": "true",
+
+        "pk.mode": "none"
+    }
+}
