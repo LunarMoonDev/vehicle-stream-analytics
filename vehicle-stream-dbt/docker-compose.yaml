@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/postgres:/var/lib/postgresql/data
+      - ./scripts/create-database.sh:/docker-entrypoint-initdb.d/create-database.sh
+    networks:
+      - db-net
+
+networks:
+  db-net:
+    name: db-net
+    external: true
