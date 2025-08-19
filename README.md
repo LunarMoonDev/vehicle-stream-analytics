@@ -1,4 +1,4 @@
-# Vehicle Stream Analytics
+# 🚕 Vehicle Stream Analytics 🚗
 
 Vehicle Stream Analytics is a data pipeline project for ingesting, processing, and analyzing vehicle event data using Apache Kafka, Kafka Connect, and related technologies. The system is designed to stream vehicle events from sources such as S3 (MinIO) into Kafka topics, enabling scalable analytics and integration with downstream systems.
 
@@ -11,7 +11,7 @@ Vehicle Stream Analytics is a data pipeline project for ingesting, processing, a
 - **Docker Compose:** Orchestrates all services for local development and testing.
 - **Makefile:** Provides convenient commands for building, running, and managing the project.
 
-## Requirements
+## ❗❗❗ Requirements
 
 - **Docker & Docker Compose:** For running the services locally.
 - **jq:** Some scripts require [`jq`](https://stedolan.github.io/jq/) for processing and prettifying JSON responses.  
@@ -31,21 +31,50 @@ Vehicle Stream Analytics is a data pipeline project for ingesting, processing, a
 3. Configure connectors to ingest and process vehicle event data.
 4. Use the provided Makefile for common tasks—run `make` or `make help` to see available commands.
 
-## How I run this project
+## 🚀 How I run this project
 
-- Run the main Kafka broker with `make run_servers`.
-- *(Optional)* Watch the logs from broker1 and broker2 with `make show_server1_logs` and `make show_server2_logs`.
-- Run `make pre_setup` of `vehicle-stream-registry` for Kafka topic creation.
-- Run Schema Registry by `make run_servers` in `vehicle-stream-registry`.
-- *(Optional)* Watch logs via `show_logs`.
-- Run `make post_setup` in `vehicle-stream-registry` to register schemas.
-- Run `make pre_setup` of `vehicle-stream-connect` for Kafka topic creation.
-- Run `run_servers` of `vehicle-stream-connect` to run Kafka Connect with MinIO.
-- *(Optional)* Watch logs via `show_connect_logs` or `show_minio_logs`.
-- Run `make post_setup` to register connectors in that folder.
-- Run `run_servers` in `vehicle-stream-dbt` to run Postgres and `show_logs` to watch dbt server.
-- In `vehicle-stream-ingest`, run `run_servers` and `show_logs` to watch json to avro stream service.
-- In `vehicle-stream-processor`, run `run_servers` and `show_logs` to watch stream processor service
+1. **Start Kafka brokers:**
+   - Run the main Kafka broker:  
+     `make run_servers`
+   - *(Optional)* Watch logs from broker1 and broker2:  
+     `make show_server1_logs`  
+     `make show_server2_logs`
+
+2. **Set up Schema Registry (`vehicle-stream-registry`):**
+   - Pre-setup for Kafka topic creation:  
+     `make pre_setup`
+   - Start Schema Registry:  
+     `make run_servers`
+   - *(Optional)* Watch logs:  
+     `make show_logs`
+   - Register schemas:  
+     `make post_setup`
+
+3. **Set up Kafka Connect (`vehicle-stream-connect`):**
+   - Pre-setup for Kafka topic creation:  
+     `make pre_setup`
+   - Start Kafka Connect with MinIO:  
+     `make run_servers`
+   - *(Optional)* Watch logs:  
+     `make show_connect_logs`  
+     `make show_minio_logs`
+   - Register connectors:  
+     `make post_setup`
+
+4. **Set up DBT and Postgres (`vehicle-stream-dbt`):**
+   - Start Postgres:  
+     `make run_servers`
+   - *(Optional)* Watch dbt server logs:  
+     `make show_logs`
+
+5. **Start stream services:**
+   - **Ingest service (`vehicle-stream-ingest`):**  
+     `make run_servers`  
+     `make show_logs`
+   - **Processor service (`vehicle-stream-processor`):**  
+     `make run_servers`  
+     `make show_logs`
+
 
 ## Note:
 
