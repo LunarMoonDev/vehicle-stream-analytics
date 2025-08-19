@@ -1,11 +1,55 @@
-# vehicle-stream-analytics
-This is a project demonstrating my capability in implementing streaming microservices
+# Vehicle Stream Analytics
 
+Vehicle Stream Analytics is a data pipeline project for ingesting, processing, and analyzing vehicle event data using Apache Kafka, Kafka Connect, and related technologies. The system is designed to stream vehicle events from sources such as S3 (MinIO) into Kafka topics, enabling scalable analytics and integration with downstream systems.
 
+## Key Components
 
-Need to install jq
+- **Kafka (KRaft mode):** Handles event streaming and topic management, configured for high availability.
+- **Kafka Connect:** Integrates external data sources (e.g., S3, JDBC) with Kafka using connectors.
+- **Schema Registry:** Manages Avro/JSON schemas for Kafka topics.
+- **MinIO:** Provides S3-compatible object storage for raw vehicle event data.
+- **Docker Compose:** Orchestrates all services for local development and testing.
+- **Makefile:** Provides convenient commands for building, running, and managing the project.
 
+## Requirements
 
+- **Docker & Docker Compose:** For running the services locally.
+- **jq:** Some scripts require [`jq`](https://stedolan.github.io/jq/) for processing and prettifying JSON responses.  
+  Install with your package manager or download from the official site.
+
+## Features
+
+- Stream vehicle events from S3 buckets into Kafka topics.
+- Transform and route events using Kafka Connect.
+- Schema management for consistent data serialization.
+- Easily extensible with additional connectors and sinks.
+
+## Usage
+
+1. Clone the repository.
+2. Use Docker Compose to start all services.
+3. Configure connectors to ingest and process vehicle event data.
+4. Use the provided Makefile for common tasks—run `make` or `make help` to see available commands.
+
+## How I run this project
+
+- Run the main Kafka broker with `make run_servers`.
+- *(Optional)* Watch the logs from broker1 and broker2 with `make show_server1_logs` and `make show_server2_logs`.
+- Run `make pre_setup` of `vehicle-stream-registry` for Kafka topic creation.
+- Run Schema Registry by `make run_servers` in `vehicle-stream-registry`.
+- *(Optional)* Watch logs via `show_logs`.
+- Run `make post_setup` in `vehicle-stream-registry` to register schemas.
+- Run `make pre_setup` of `vehicle-stream-connect` for Kafka topic creation.
+- Run `run_servers` of `vehicle-stream-connect` to run Kafka Connect with MinIO.
+- *(Optional)* Watch logs via `show_connect_logs` or `show_minio_logs`.
+- Run `make post_setup` to register connectors in that folder.
+- Run `run_servers` in `vehicle-stream-dbt` to run Postgres and `show_logs` to watch dbt server.
+- In `vehicle-stream-ingest`, run `run_servers` and `show_logs` to watch json to avro stream service.
+- In `vehicle-stream-processor`, run `run_servers` and `show_logs` to watch stream processor service
+
+## Note:
+
+Following are commands that helps with debugging the services:
 ``` bash
 docker exec kafka bash -c "echo '{\"vehicle_id\":\"v1\",\"driver_id\":\"d1\",\"lat\":37.7749,\"lon\":-122.4194,\"speed\":82,\"event_time\":1690000001000}' | /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:19092 --topic vehicle-event-json --property parse.key=false --property value.serializer=org.apache.kafka.common.serialization.StringSerializer"
 
