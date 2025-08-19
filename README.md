@@ -1,6 +1,6 @@
 # 🚕 Vehicle Stream Analytics 🚗
 
-Vehicle Stream Analytics is a data pipeline project for ingesting, processing, and analyzing vehicle event data using Apache Kafka, Kafka Connect, and related technologies. The system is designed to stream vehicle events from sources such as S3 (MinIO) into Kafka topics, enabling scalable analytics and integration with downstream systems.
+Vehicle Stream Analytics is a **toy project** for experimenting with ingesting, processing, and analyzing vehicle event data using Apache Kafka, Kafka Connect, and related technologies. It demonstrates how to stream vehicle events from sources such as S3 (MinIO) into Kafka topics, enabling scalable analytics and
 
 ## Key Components
 
