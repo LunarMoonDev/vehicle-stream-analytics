@@ -19,6 +19,11 @@ show_servers:
 	@echo "Listing running Ingest servers..."
 	@docker compose ps | grep json_to_avro
 
+# shows logs of ingest server
+show_logs:
+	@echo "Showing Ingest server logs..."
+	@docker compose logs -f json_to_avro
+
 # stops ingest server and removes containers
 stop_servers:
 	@echo "Stopping Ingest servers..."

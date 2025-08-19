@@ -21,6 +21,11 @@ show_servers:
 	@echo "Listing running Schema Registry servers..."
 	@docker compose ps | grep schema_registry
 
+# shows logs of schema registry server
+show_logs:
+	@echo "Showing Schema Registry server logs..."
+	@docker compose logs -f schema_registry
+
 # stops schema registry server and removes containers
 stop_servers:
 	@echo "Stopping Schema Registry servers..."

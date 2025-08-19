@@ -19,6 +19,11 @@ show_servers:
 	@echo "Listing running Processor servers..."
 	@docker compose ps | grep stream_processor
 
+# shows logs of stream processor server
+show_logs:
+	@echo "Showing Processor server logs..."
+	@docker compose logs -f stream_processor
+
 # stops stream processor server and removes containers
 stop_servers:
 	@echo "Stopping Processor servers..."
