@@ -1,0 +1,29 @@
+version: '3.8'
+
+
+services:
+  raw_stream:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: raw_stream
+    environment:
+      - KAFKA_HOST=${KAFKA_HOST}
+      - KAFKA_EVENT_TOPIC=${KAFKA_EVENT_TOPIC}
+      - KAFKA_METADATA_TOPIC=${KAFKA_METADATA_TOPIC}
+      - KAFKA_DELAY=${KAFKA_DELAY}
+      - KAFKA_CLIENT_ID=${KAFKA_CLIENT_ID}
+      - START_DATE=${START_DATE}
+      - END_DATE=${END_DATE}
+      - START_TIME=${START_TIME}
+      - END_TIME=${END_TIME}
+      - EARLY_EXIT_PROBABILITY=${EARLY_EXIT_PROBABILITY}
+      - RANDOM_SEED=${RANDOM_SEED}
+      - KAFKA_DELAY=${KAFKA_DELAY}
+    networks:
+      - kafka-net
+
+networks:
+  kafka-net:
+    name: kafka-net
+    external: true
