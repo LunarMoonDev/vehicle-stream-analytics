@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Global variables
 KAFKA_CONTAINER="${KAFKA_CONTAINER:-kafka}"
@@ -37,7 +38,14 @@ for TOPIC in "${!TOPICS[@]}"; do
         --replication-factor "$REPLICATION" \
         --partitions "$PARTITIONS" \
         --config cleanup.policy="$CLEANUP" \
-        --if-not-exists"
+        --if-not-exists" | sed 's/^/\t- /'
 done
 
 echo -e "${GREEN}✅ Done creating topics inside container '$KAFKA_CONTAINER'${NC}"
+
+
+echo "Listing all topics created in kafka broker..."
+docker exec "$KAFKA_CONTAINER" bash -c "/opt/kafka/bin/kafka-topics.sh --bootstrap-server $KAFKA_CONTAINER:9092 --list"
+
+echo -e "Running schema registry server..."
+docker compose -f ../docker-compose.yaml up --build -d
