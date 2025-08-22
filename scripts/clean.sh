@@ -1,8 +1,9 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 set -e
 
-KAFKA_VOLUME_PATH=".data/kafka"
-KAFKA1_VOLUME_PATH=".data/kafka1"
+KAFKA_VOLUME_PATH="../.data/kafka"
+KAFKA1_VOLUME_PATH="../.data/kafka1"
 
 if [[ -d "$KAFKA_VOLUME_PATH" ]]; then
     echo "Removing Kafka volume at $KAFKA_VOLUME_PATH"

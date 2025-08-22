@@ -1,7 +1,8 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 set -e
 
-POSTGRES_VOLUME_PATH=".data/postgres"
+POSTGRES_VOLUME_PATH="../.data/postgres"
 
 if [[ -d "$POSTGRES_VOLUME_PATH" ]]; then
     echo "Removing DB volume at $POSTGRES_VOLUME_PATH"
