@@ -41,7 +41,7 @@ public class SuddenBrakeDetector implements FixedKeyProcessor<String, EnrichedEv
             int speedDrop = prev.getSpeed() - record.value().getSpeed();
             logger.debug("Difference in speed change: {}", speedDrop);
 
-            if (duration.getSeconds() <= 2 && speedDrop > 30) {
+            if (duration.getSeconds() <= 2 && speedDrop >= 30) {
                 SuddenBrakingEvent brakingEvent = mUtil.createBrakingEvent(record.value(), duration, speedDrop);
                 logger.info("Pushing a sudden braking event {}", brakingEvent);
                 context.forward(record.withValue(brakingEvent));
